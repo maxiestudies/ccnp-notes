@@ -1,0 +1,40 @@
+#+TITLE: CCNP Notes
+#+STARTUP: overview
+* Part 1
+* Part 2 Layer 2
+** Chapter 2 STP
+** Chapter 3 STP tuning
+** Chapter 4 MSTP
+** Chapter 5 VLAN + Etherchannels
+* Part 3 Routing
+** Chapter 6 IP Routing
+** Chapter 7 EIGRP
+** Chapter 8 OSPF
+** Chapter 9 Advanced OSPF
+** Chapter 10 OSPFv3
+** Chapter 11 BGP
+** Chapter 12 Advanced BGP
+** Chapter 13 Multicast
+* Part 4 Services
+** Chapter 14 QoS
+** Chapter 15 IP Services
+* Part 5 Overlay
+** Chapter 16 Overlay tunnels
+* Part 6 Wireless
+** Chapter 17 Signals and Modulation
+** Chapter 18 Infrastructure
+** Chapter 19 Roaming and location
+** Chapter 20 Authentication
+** Chapter 21 Troubleshooting
+* Part 7 Architecture
+** Chapter 22 Enterprise Architecture
+** Chapter 23 Fabric
+** Chapter 24 Assurance
+* Part 8 Security
+** Chapter 25 Access control
+** Chapter 26 Device access control and security
+* Part 9 SDN
+** Chapter 27 Virtualization
+** Chapter 28 Programability concepts
+** Chapter 29 Automation tools
+** Chapter 30 Final preparation
