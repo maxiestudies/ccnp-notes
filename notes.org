@@ -32,6 +32,102 @@
 ** Chapter 24 Assurance
 * Part 8 Security
 ** Chapter 25 Access control
+*** Network Security Design for Threat Defense
+
+    *PIN = places in the network*
+    - Branch: less secure
+      attacks: endpoint malware, wireless like rogue AP and man in the middle, explotation of trust
+    - Campus: large number of users from different categories
+      attacks: phishing, web-based exploits, unauthorized network access, malware propagation, and botnet infestations.
+    - Data center: most critical information assets, lots of servers
+      attacks: data extraction, malware propagation, unauthorized network access (application compromise), botnet infestation (scrumping), data loss, privilege escalation, and reconnaissance
+    - Edge: primary ingress and egress to internet
+      attacks: web server vulnerabilities, distributed denial-of-service (DDoS) attacks, data loss, and MitM attacks
+    - Cloud: require independent certification
+      attacks: web server vulnerabilities, loss of access, data loss, malware, and MitM attacks
+    - WAN: connects all the PINs together.
+      attacks: malware propagation, unauthorized network access, WAN sniffing, and MitM attacks
+
+    *Cisco SAFE secure domains*
+    - Management: manage devices from centralized infrastructure
+    - Security intelligence: Security intelligence provides detection of emerging malware and cyber threats
+    - Compliance
+    - Threat defense: provides this visibility through network traffic telemetry, file reputation, and contextual information (such as device types, locations, users, identities, roles, privileges levels, login status, posture status
+    - Secure services: access control, virtual private networks
+      
+    *Protection during attack phases*
+    - Before: stablishing policies and implementing prevention to reduce risk. Full knowledge of the assets to be protected and threats is required.
+    - During: Threat analysis and incident response
+    - After: ability to detect, contain, and remediate an attack. Lessons learned should be incorporated
+      
+**** Cisco Talos
+     Security team that analizes security threats and creates a thread that is fed into cisco security products
+
+**** Cisco threat grid
+     Software that statically and dynamically analizes files for threat detection.
+     Uses information from Talos
+     Runs files in a sandbox with special instrumentation
+
+**** Advanced malware protection
+     Database connected to Talos and threat grid. Used to analyze files and detect malware.
+
+**** Cisco AnyConnect
+     VPN Client that also offers endpoint compliance controlling.
+
+**** Cisco Umbrella
+     DNS server cluster run by cisco
+
+**** Web security appliance
+     Next generation firewall that is connnected to Talos and the threat grid
+     Offers:
+     - Web reputation filters
+     - Web filtering
+     - Application visibility and control, used to control internet access
+
+**** Cisco email security appliance
+**** Next-Generation Intrusion Prevention System (NGIPS)
+     - Real-time contextual awareness
+     - Advanced threat protection
+     - Intelligent security automation
+     - Unparalleled performance and scalability
+     - Application visibility and control (AVC) and URL filtering
+
+**** Next-Generation Firewall (NGFW)
+     - Standard firewall capabilities such as stateful inspection
+     - An integrated IPS
+     - Application-level inspection
+     - The ability to leverage external security intelligence to address evolving security threats
+
+**** Cisco Stealthwatch
+     is a collector and aggregator of network telemetry data that performs network security analysis and monitoring
+     - Real-time threat detection
+     - Incident response and forensics
+     - Network segmentation
+     - Network performance and capacity planning
+     - Ability to satisfy regulatory requirements
+
+**** Cisco Identity Services Engine (ISE)
+     is a security policy management platform that provides highly secure network access control (NAC) to users and devices across wired, wireless, and VPN connections
+
+*** Network Access Control (NAC)
+**** 802.1x
+     is a standard for port-based network access control (PNAC) that provides an authentication mechanism for local area networks (LANs) and wireless local area networks (WLANs)
+
+     *Extensible Authentication Protocol (EAP)*:
+     This message format and framework defined by RFC 4187 provides an encapsulated transport for authentication parameters.
+     *EAP method* (also referred to as EAP type):
+     Different authentication methods can be used with EAP
+     *EAP over LAN (EAPoL)*: 
+     This Layer 2 encapsulation protocol is defined by 802.1x for the transport of EAP messages over IEEE 802 wired and wireless networks
+     *RADIUS protocol*: 
+     This is the AAA protocol used by EAP
+     
+     *Suplicant*: software on the device trying to access the network through EAPoL
+     *Authenticator*: network appliance the suplicant connects to. The appliance makes no decisions, and allows or denys access only on command of the authentication server
+     *Authentication Server*: RADIUS server that has the user database and authenticates the clients
+
+     *EAP Methods*:
+     + 
 ** Chapter 26 Device access control and security
 * Part 9 SDN
 ** Chapter 27 Virtualization
