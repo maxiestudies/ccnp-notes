@@ -126,8 +126,96 @@
      *Authenticator*: network appliance the suplicant connects to. The appliance makes no decisions, and allows or denys access only on command of the authentication server
      *Authentication Server*: RADIUS server that has the user database and authenticates the clients
 
-     *EAP Methods*:
-     + 
+     *Authentication process*:
+     1. either the authentcator notices a port coming up or the supplicant sends an EAPoL message    AP Methods*:
+     2. 
+     3. packet is relayed over inside a radious packet.
+     4. if successful, server returns a access-accept with optional parameters (downloadable ACLs). The authenticator opens the port
+
+***** EAP methods
+      Mostly based on TLS
+      *EAP challenge-based authentication method* (EAP-MD5)
+      uses the MD5 message-digest to encrypt the credentials. The supplicant doesn't have a way to authenticate the server (bad)
+      *EAP TLS* (EAP-TLS)
+      Uses PKI to provide mutual authentication. Very secure, high administrative overhead
+      *EAP tunneled TLS* (EAP-FAST) (EAP-TTLS) (PEAP)
+      - PEAP: only the server requires a certificate and builds a TLS tunnel over which authentication happens using inner auth methods
+      *EAP inner authentication methods* (EAP-GTC) (EAP-MSCHAPv2) (EAP-TLS)
+      + EAP-MSCHAPv2 (PEAPv0): client credentials are sent over a MSCHAPv2 session. Used with Microsoft Active Directory
+      + EAP-GTC (PAPv1): created as an alternative to EAP-MSCHAPv2, can use any identity store
+      + EAP-TLS: tunnel over tunnel, same as normal EAP-TLS
+      + EAP-FAST: cisco propietary, allows for faster reauthentication and supports roaming. Forms a TLS tunnel and can reauthenticate using protected access credentials (PACs), similar to a secure cookie.
+      + EAP-TTLS: similar to PEAP but less supported. Allows for non inner-EAP auth methods like PAP, CHAP and MS-CHAP
+      
+***** EAP chaining
+      included in EAP-FAST, supports machine and user auth inside a single TLS tunnel
+
+***** MAC authentication bypass (MAB)
+      enables port-based access using the MAC-address of an endpoint, used as fallback for 802.1x
+      1. switch tries to use 802.1x and
+      2. the switch opens a port for only one packet, learns the mac address and discards it. After that sends a RADIUS access request using the learned mac address
+      3. the RADIUS server determines if the device can access the network.
+
+**** Web Authentication
+     can be used as fallback for 802.1x
+***** Local web auth (LWA)
+      the switch redirects the user to a web page. Then sends the request itself to the RADIUS server. Limited options.
+***** Central web authentication with cisco ISE (CWA)
+      offers advanced services. Process:
+      1. 802.1x fails
+      2. switch performs MAB
+      3. auth server sends a radius result, including an URL redirection to the centralized server
+      4. endpoint gets ip over DHCP
+      5. credentials are entered on the browser
+      6. ISE sends a reauthentication challenge to the switch
+      7. switch sends a new MAB request to the ISE and it issues a final authorization result to the switch.
+**** Enhanced Flexible Authentication (FlexAuth)
+     enables multiple methods concurrently for fastness
+
+**** Cisco identity-based networking services (IBNS)
+     Combination of Enhanced Flexauth, Common classification policy language and ISE
+***** Cisco TrustSec
+      Uses Security Group Tags (SGT) to enforce firewall rules. A SGT should represent the context of the user/device and it's function. Department based firewalling 
+
+      *ingress classification*
+      process of assigning SGT to users or endpoints.
+      - Dynamic: downloaded as an authorization option from the ISE
+      - Static: used where 802.1x or MAB are not required (Data-Center).
+
+      *Propagation*
+      process of communicating the mappings to the TrustSec network.
+      - inline tagging: switch inserts the SGT tag into the frame. Only supported by cisco switches with ASIC with support for TrustSec.
+      - SGT Exchange protocol (SXP): TCP-based peer-to-peer protocol for devices that don't support inline tagging.
+
+      *Egress enforcement*
+      enforced at the egress point of the TrustSec network
+      - Security group ACL (SGACL): access lists provide filtering in routers and switches
+      - Security group Firewall (SGFW): provides enforcement in firewalls. Requires tag based rules to be configured in the FW
+**** MACsec
+     standards-based layer 2 protocol encryption method. Allows for switches to encrypt traffic on the wire.
+     Additional fields are added, this have to be supported by all the switches in the chain to work.
+     Authentication with Galois Method Authentication Code (GMAC) or Galois/Counter Mode Advanced Encryption Standard (AES-GCM)
+
+     *security tag fields*
+     - MACsec Ethertype (first two octets): Set to 0x88e5, designating the frame as a MACsec frame
+     - TCI/AN (third octet): Tag control information/association, designates version number if confidentiality is used on it's own.
+     - SL (fourth octet): short length field, designates the length
+     - Packet Number (octets 5-8): numbering for replay protection and initializing vector
+     - SCI (octets 9-16): secure channel identifier, for classifying the connection to the virtual port
+
+     *keying mechanisms*
+     + Security Association Protocol (SAP): proprietary cisco
+     + MACsec key agreemant protocol (MKA): provides required session keys and manages the encryption keys. Supported between endpoint-switch and switch-switch
+
+***** Downlink MACsec
+      term used for the switch-endpoint link.
+      Handled by the MKA protocol
+      Both devices need to support MACsec
+      Can be set as an authorization option
+
+***** Uplink MACsec
+      term used for switch-switch link
+      uses SAP by default
 ** Chapter 26 Device access control and security
 * Part 9 SDN
 ** Chapter 27 Virtualization
