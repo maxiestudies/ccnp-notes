@@ -217,6 +217,21 @@
       term used for switch-switch link
       uses SAP by default
 ** Chapter 26 Device access control and security
+*** Access Control Lists
+    Sequential list of access control entries (ACE) for packet classification
+    Used for filtering, qos and nat
+    
+    + *numbered standard* can filter only on source ip, numbers 1-99 and 1300-1999
+    + *number extended* can filter on source, destination, port, protocol and more. 100-199 and 2000-2699
+    + *named* same as avobe but with names
+    + *port acl* can use standard, extended, and names acls to filter on L2
+    + *vlan acl* can use standard, extended, and names acls to filter vlans
+
+    use wilcard masks to match patckets
+    have to be applied to an interface
+
+    the *any* keyword matches all packets, the *host* keyword matches only one host
+
 * Part 9 SDN
 ** Chapter 27 Virtualization
 ** Chapter 28 Programability concepts
