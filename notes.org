@@ -232,6 +232,30 @@
 
     the *any* keyword matches all packets, the *host* keyword matches only one host
 
+    *PACL* port access control list act on L2 ports
+    + do not support filter on control packets
+    + only incomming traffic
+    + only on hardware
+    + do not support ipv6, arp or MPLS
+
+    *VACL* vlan access control list
+    implemeted using access maps. Maps use ACLs to as match statements and an action (forward or drop on the match), similar to route maps
+*** PACL, VACL, and RACL Interaction
+    if multiple acls are configured, the order is:
+    on L2
+    - inbound pactl
+    - inbound vacl
+    - outbound vacl
+
+    on L3
+    - inbound pactl
+    - inbound vacl
+    - inbound svi
+    - outbound svi
+    - outbound vacl
+
+
+
 * Part 9 SDN
 ** Chapter 27 Virtualization
 ** Chapter 28 Programability concepts
