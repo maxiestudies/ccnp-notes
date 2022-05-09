@@ -1,5 +1,5 @@
 #+TITLE: CCNP Notes
-#+STARTUP: overview
+#+STARTUP: overview, indent
 * Part 1
 * Part 2 Layer 2
 ** Chapter 2 STP
@@ -253,7 +253,43 @@
     - inbound svi
     - outbound svi
     - outbound vacl
+*** Terminal Lines
+- Line con 0 (cty)
+  serial console
+- Line aux 0 (aux)
+  connect through a modem
+- Virtual lines (vty) 1 - 4
+  for remote telnet or ssh access. Logical, no physical interface attached
+**** Password types
+*Type 0*: insecure, not encrypted and visible
+*Type 5*: encrypted with md5
+*Type 7*: weak encryption, cisco proprietary
+*Type 8*: secure, uses sha-256 algorithm to encrypt
+*Type 9*: secure uses SCRYPT algorithm to encrypt
+**** Priviledge levels and role base access (RBAC)
+*Level 0*: disable, enable, help, exit and logout commands
+*Level 1*: EXEC mode, no configuration changes allowed
+*Level 15*: Priviledged EXEC mode, anything goes
 
+Levels 2-14 can be used to create custom permission levels
+
+EXEC timeout configures the session timeouts
+Absolute timeout terminates a session even if it's being used
+
+*** AAA Authentication, Authorization and Accounting
+*Authentication*: Enables a user to be identified and verified prior to being granted access to a network device and/or network services.
+*Authorization*: Defines the access privileges and restrictions to be enforced for an authenticated user.
+*Accounting*: Provides the ability to track and log user access, including user identities, start and stop times, executed commands (that is, CLI commands), and so on. In other words, it maintains a security log of events.
+**** TACACS+
+tcp on port 49
+can separate authentication, authorization, and accounting into different functions
+**** Radius
+IETF standard
+used for EAP
+Client/Server model
+Must return all authentication parameters in a single reply
+Good for authentication but bad for authorization
+*** Zone Based Firewall (ZBFW)
 
 
 * Part 9 SDN
