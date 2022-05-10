@@ -311,6 +311,10 @@ Good for authentication but bad for authorization
     policy-maps have a default class default for traffic that doesn't match any other class
 * Part 9 SDN
 ** Chapter 27 Virtualization
+*** OVS-DPDK
+OVS with DPDK operates entirely in user space. The DPDK Poll Mode Driver (PMD) in OVS polls for data that comes into the pNIC and processes it, bypassing the network stack
+bypasses the kernel
+requires one or more CPU cores dedicated to polling and handling the incoming data
 ** Chapter 28 Programability concepts
 ** Chapter 29 Automation tools
 ** Chapter 30 Final preparation
