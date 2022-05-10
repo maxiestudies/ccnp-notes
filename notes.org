@@ -290,8 +290,25 @@ Client/Server model
 Must return all authentication parameters in a single reply
 Good for authentication but bad for authorization
 *** Zone Based Firewall (ZBFW)
-
-
+    integrated firewall solution for cisco devices
+    uses zones to establish relationships
+    can track connection states
+**** Firewall zones
+     - Self zone: includes all routers ip addresses and is used for support and management
+     - Default zone: includes all interfaces that are not member of any other zone. Default policy drop
+     - other zones: can be created
+**** Configuration
+     create a zone
+     create a class-map. Those are similar to route maps, they use acls for (not) matching packets and define what is done if the packet is matched
+     class-maps can be match-any (bool OR) or match-all (bool AND)
+     policy-maps have pollicy drop, pass (allow) and inspect. Inspect tracks the connection state
+     policy-maps apply the fw configuration to the class-map
+     apply a policy map to a traffic flow. Those have a direction and have to be configured in both ways for bidirectional communication
+*** Control plane policing (CoPP)
+    is a QoS policy applied to traffic to or sourced from the router, used to protect the CPU resources
+    uses class-maps to classify traffic and applies the policies with policy-maps
+    to test the policies, the *violate* policy can be set to transmit to ensure no disruptions. This policy can be monitored to set a baseline
+    policy-maps have a default class default for traffic that doesn't match any other class
 * Part 9 SDN
 ** Chapter 27 Virtualization
 ** Chapter 28 Programability concepts
