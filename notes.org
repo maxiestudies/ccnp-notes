@@ -311,10 +311,41 @@ Good for authentication but bad for authorization
     policy-maps have a default class default for traffic that doesn't match any other class
 * Part 9 SDN
 ** Chapter 27 Virtualization
+*** Terminology
+**** Network functions virtualization (NFV)
+framework cretated by the european telecommunications standards institute to decouple network functions from propietary appliances
+**** Virtual network function (VNF)
+virtual or software version of an NFV
+**** Virtualized infrastructure manager (VIM)
+manages NFV resources
+**** VNF Performance
+two patterns:
+- North-south: typical traffic when an external client requests information from a service
+- East-west: traffic that is internal to the network, for example a backend service doing db queries
 *** OVS-DPDK
 OVS with DPDK operates entirely in user space. The DPDK Poll Mode Driver (PMD) in OVS polls for data that comes into the pNIC and processes it, bypassing the network stack
 bypasses the kernel
 requires one or more CPU cores dedicated to polling and handling the incoming data
+*** PCI Passthrough
+allows the virtualized system to attach directly to the pNIC, bypassing the hypervisor
+downside, only one VNFs per pNIC
+*** SR-IOV
+allows multiple VNF to share one pNIC
+emulates multiple PCIe devices, each VNF gets an emulated pNIC
+emulated devices are called _virtual functions_ and physical devices _physical functions_
+*** Cisco Enterprise Network Functions Virtualization (ENFV)
+based on the ETSI NFV, runs multiple network functions in a single x*G platform
+**** Components
+- Management and orchestration
+- VNFs
+- Network functions virtualization infrastructure software (NFVIS) (Platform OS)
+- Hardware resources
 ** Chapter 28 Programability concepts
+*** REST API
+- GET: Requests data
+- POST: submits data
+- PUT: replaces data
+- PATCH: appends data
+- DELETE: removes data
 ** Chapter 29 Automation tools
 ** Chapter 30 Final preparation
