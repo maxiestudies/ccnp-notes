@@ -1,5 +1,5 @@
 #+TITLE: CCNP Notes
-#+STARTUP: overview, indent
+#+STARTUP: overview indent
 * Part 1
 * Part 2 Layer 2
 ** Chapter 2 STP
@@ -348,4 +348,15 @@ based on the ETSI NFV, runs multiple network functions in a single x*G platform
 - PATCH: appends data
 - DELETE: removes data
 ** Chapter 29 Automation tools
+*** Embeded Event Manager (EEM)
+engine running on cisco devices that allows the writing of applets and tcl scripts
+executes cli commands when certain events are triggered
+can be run manually and trigger tcl scripts
+*** Puppet
+agent based
+*** Chef
+written in Ruby and Erlang, recipes are written in Ruby
+both push and pull possible
+client/server model 
+
 ** Chapter 30 Final preparation
