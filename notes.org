@@ -348,15 +348,29 @@ based on the ETSI NFV, runs multiple network functions in a single x*G platform
 - PATCH: appends data
 - DELETE: removes data
 ** Chapter 29 Automation tools
+PPDIOO (Prepare, Plan, Design, Implement, Observe, Optimize)
 *** Embeded Event Manager (EEM)
 engine running on cisco devices that allows the writing of applets and tcl scripts
 executes cli commands when certain events are triggered
 can be run manually and trigger tcl scripts
 *** Puppet
 agent based
+*** Puppet Bolt
+Agentless mode for Puppet
+Orchestrator-driven tasks use the Puppet architecture, used for large-scale
+Standalone tasks connect directly to the devices and don't need a puppet environment
 *** Chef
 written in Ruby and Erlang, recipes are written in Ruby
 both push and pull possible
 client/server model 
-
+*** SaltStack
+Uses an agent and server mode
+Nodes are called minions
+Reactors live on the _master_ and listens to _beacons_ on the nodes that inform of configuration changes
+Grains run on the nodes and gather information to report to the master
+Pillars store data that the minon can retrieve from the maste
+*** Saltstack ssh
+Agentless option, requires python on the target node
+*** Ansible
+Agentless
 ** Chapter 30 Final preparation
