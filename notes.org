@@ -1,8 +1,34 @@
 #+TITLE: CCNP Notes
 #+STARTUP: overview indent
-* Part 1
+* Part 1 Packet Forwarding
 * Part 2 Layer 2
 ** Chapter 2 STP
+*** IEEE 802.1D STP
+Original version
+*States:*
+- Disabled: = shut down
+- Blocking: enabled but not forwarding
+- Listening: can send and receive BPDUs but doesn't forward traffic
+- Learning: can modify the mac address table but doesn't forward traffic
+- Forwarding: can froward traffic and update the mac table
+- Broken: if a configuration or operational problem is detected. Discards all traffic
+*port types*:
+- Root Port (RP): connects to the root bridge or upstream switch
+- Designated port (DP): receives and forwards BPDUs to other switches
+- Blocking port: doesn't forward traffic
+*terminology*:
+- Root bridge: top of the tree, all ports forward
+- Bridge protocol data unit (BPDU): packet used to identify hierarchy and notify changes
+  - Configuration BPDU: used to identify the root bridge, root, designated and blocked ports. Has the fields STP type, root path cost, root bridge identifier, local bridge identifier, max age, hello time and forward delay
+  - Topology change notifcation (TCN) BPDU: used to communicate topology changes
+- root path cost: combined cost to the root switch
+- system priority: indicates the preference for the root switch
+- system id extension: indicates the vlan that the BPDU correlates to
+- root bridge identifier: combination of the root bridge mac address, system id extension and system priority
+- local bridge identifier: combination of the local switch's system mac address system id extension and system priority of the root bridge
+- max age: maximum duration before the bridge saves its BPDU
+- hello time: time that a BPDU is advertised
+- forward delay: amount of time that a port stays in listening or learning states
 ** Chapter 3 STP tuning
 ** Chapter 4 MSTP
 ** Chapter 5 VLAN + Etherchannels
