@@ -29,6 +29,47 @@ Original version
 - max age: maximum duration before the bridge saves its BPDU
 - hello time: time that a BPDU is advertised
 - forward delay: amount of time that a port stays in listening or learning states
+*path cost*:
+- short mode: reference speed of 20Gbps
+- long mode: reference speed of 20Tbps
+| link speed | short mode | long mode |
+|------------+------------+-----------|
+| 10 Mbps    |        100 |   2000000 |
+| 100 Mbps   |         19 |    200000 |
+| 1 Gbps     |          4 |     20000 |
+| 10 Gbps    |          3 |      2000 |
+| 20 Gbps    |          1 |      1000 |
+| 100 Gbps   |          1 |       200 |
+| 1 Tbps     |          1 |        20 |
+| 10 Tbps    |          1 |         2 |
+|------------+------------+-----------|
+the entire L2 topology has to use the same cost mode!!
+*** Building the STP Topology
+**** Root bridge election
+switches start thinking that they are root and update to the new root if they receive a preferred BPDU
+this happens if the priority in the bridge identifier is lower than it's own. If they are the same, the system mac address wins
+bridge priorities are composed by the configured priority + the sys-id-ext (vlan number)
+**** Locating root port
+the bridge uses following parameters to pick it's root port (in order, the next is only used if there is a tie):
+1. lowest cost
+2. lowest system priority of advertising switch
+3. lowest system mac of advertising switch
+4. if multiple links to the same switch, lowest priority wins
+5. if multiple links to the same switch, lowest port number
+**** Locating designated and blocked ports
+To decide which ports should be blocked (in order, next step is used if tie):
+1. the port should be a designated and not a RP
+2. the switch with the lowest path cost to the root wins
+3. system priority is compared
+4. mac addresses are compared
+*** Topology changes
+if a switch detects a status change, it sends a TCN BPDU toward the root bridge
+Upstream switches forward TCNs and send an ack to the sending switch
+the root bridge creates a TCN BPDU and floods it to the whole topology
+switches that received a TCN from the root set the mac address timer (default 15 seconds), this flushes all mac addresses that haven communicated for the timer time
+this prevents the bridge from sending traffic a to a mac that is no longer reachable, increases unknown unicast traffic
+mac timers are restored after the second BPDU
+
 ** Chapter 3 STP tuning
 ** Chapter 4 MSTP
 ** Chapter 5 VLAN + Etherchannels
