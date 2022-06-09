@@ -69,6 +69,29 @@ the root bridge creates a TCN BPDU and floods it to the whole topology
 switches that received a TCN from the root set the mac address timer (default 15 seconds), this flushes all mac addresses that haven communicated for the timer time
 this prevents the bridge from sending traffic a to a mac that is no longer reachable, increases unknown unicast traffic
 mac timers are restored after the second BPDU
+*** Rapid Spanning Tree Protocol (RSTP)
+**** Port States
+- Discarding: combines traditional disabled, blocking and listening
+- Learning: modifies the mac table from incoming traffic but doesn't forward
+- Forwarding: forwards traffic
+**** Port Roles
+- Root Port (RP): connects to the root or upstream switch
+- Designated Port (DP): receives and forwards frames to other switches
+- Alternate Port: provides alternate connectivity toward the root switch
+- Backup port: provides link redundancy to the root.
+**** Port types:
+- Edge port: at the edge of the network where hosts connect
+- Root port: best path cost toward the root
+- Point-to-point port: Ports that connect to another RSTP switch with full duplex.
+*** Building the RSTP Topology
+RSTP handshake is used to transition through the states faster
+1. check point-to-point (full duplex) status
+2. establish handshake (config BPDUs) that their interface is DP
+3. superior switch identification
+4. inferior switch marks it's port as RP and moves all non-edge ports to discarding
+5. inferior switch sends an agreement (config BPDU) to the root
+6. inferior switch moves it's RP to forwarding
+7. inferior switch repeats the process for other downstream ports
 
 ** Chapter 3 STP tuning
 ** Chapter 4 MSTP
