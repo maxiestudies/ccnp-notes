@@ -94,6 +94,14 @@ RSTP handshake is used to transition through the states faster
 7. inferior switch repeats the process for other downstream ports
 
 ** Chapter 3 STP tuning
+*** Root Bridge Placement
+make the core root and the secondary so as to minimize changes to the tree
+the command spanning-tree vlan _vlan-id_ root {primary | secondary} [diameter _diameter_ ] sets primary to 24576, secondary to 28672
+the diameter command tunes the stp timers and the parameter is the number of L2 hops between the switch and the root. Timers config are carried through BPDUs
+*** Modifying Root and Blocked ports locations
+by modifying the cost is possible to trigger port type changes and modify the stp path.
+*port priority* sets which port is alternate when multiple links are used between switches
+*** Aditional STP protection mechanisms
 ** Chapter 4 MSTP
 ** Chapter 5 VLAN + Etherchannels
 * Part 3 Routing
