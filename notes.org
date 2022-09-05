@@ -103,6 +103,16 @@ by modifying the cost is possible to trigger port type changes and modify the st
 *port priority* sets which port is alternate when multiple links are used between switches
 *** Aditional STP protection mechanisms
 ** Chapter 4 MSTP
+Multiple spanning tree protocol, maps multiple Vlans to one stp tree for performance optimization
+original standard 802.1D also called CST (Common spanning tree)
+Grouped Vlans are called regions
+Regions appear as one single virtual switch to other stp entities
+Uses a special instance (number 0) on ports of the MST regions
+Information about other MSTs is nested on the BPDUs, optimizing traffic
+*** common misconfigurations
+- Vlan asignment to the IST
+- Trunk link pruning
+
 ** Chapter 5 VLAN + Etherchannels
 * Part 3 Routing
 ** Chapter 6 IP Routing
