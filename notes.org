@@ -114,6 +114,41 @@ Information about other MSTs is nested on the BPDUs, optimizing traffic
 - Trunk link pruning
 
 ** Chapter 5 VLAN + Etherchannels
+*** VTP (Virtual Trunking Protocol)
+server-client protocol to deploy vlans on multiple switches
+version 1, 2,3
+**** Advertisements
+- Summary: every 300 seconds when add, remove or changed
+- Subset: when vlan config change
+- client requests: request from a clien to get more information
+**** Roles
+- Server: responsible for creation, modification and deletion of vlans
+- Client: receives information from server. Can't configure locally
+- Transparent: sends and receives info but doesn't modify local config
+- off: doesn't participate in VTP
+*** DTP (Dynamic Trunking Protocol)
+protocol to negotiate trunking capabilities
+**** Modes
+- Trunk: statically set to trunk and advertises DTP to the other part to become a trunk
+- dynamic desirable: acts as access but listens and advertises to become a trunk
+- dynamic auto: acts as access and listens but doesn't advertise
+*** Etherchannel bundle
+Logical grouping of physical ports. LACP and PAgP
+max and min number of interfaces can be configured
+**** PAgP
+Modes:
+- Auto: doesn't initiate but listens
+- Desirable: tries to initiate
+**** LACP
+Modes:
+- Passive: doesn't initiate but listens
+- Active: tries to initiate
+
+Options:
+- LACP Fast: sends updates every 1 second
+- system priority: sets up which is the master of the port channel. This switch is in charge of deciding which ports to use in case that the max amount is surpased
+- interface priority: sets up which interface should be used in case where more interfaces than the max defined are available
+
 * Part 3 Routing
 ** Chapter 6 IP Routing
 ** Chapter 7 EIGRP
