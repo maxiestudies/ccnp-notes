@@ -175,7 +175,8 @@ Components:
 - prefix length: number of leading bits in the subnet mask
 - administrative distance: rating of trustworthiness of a routing information source
 - metric: unit of measure used by a routing protocol in best-path calculation
-
+the forwarding decision is a function of the FIB and results from the
+calculations performed in the RIB. The RIB is calculated though the combination of routing protocol metrics and administrative distance
 ** Chapter 7 EIGRP
 ** Chapter 8 OSPF
 ** Chapter 9 Advanced OSPF
