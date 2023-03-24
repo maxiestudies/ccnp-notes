@@ -151,6 +151,31 @@ Options:
 
 * Part 3 Routing
 ** Chapter 6 IP Routing
+*** Distance vector
+uses hop count to determine the best route
+advertise from their own perspective. No router has a complete overview of the network
+*** Enhanced distance vector
+sends updates only on change
+fast convergence
+forms neighbor relationships
+uses bandwidth, delay, reliability, load, and mtu for path calculations
+load balance between equal or unequal cost paths
+*** Link state
+advertises the link state and metric of each connected links
+advertisements are stored in the link-state database (LSDB) and forwarded to other neighbors
+with all the information each router runs the Dijkstra shortest path first algorithm to calculate the best loop free path
+*** Path vector
+looks at the path attributes to select best path
+keeps record of each AS to avoid loops
+
+*** Path selection
+evaluates the prefix length in the Forwarding information base (FIB)
+that is programmed via the routing table or Routing information base (RIB)
+Components:
+- prefix length: number of leading bits in the subnet mask
+- administrative distance: rating of trustworthiness of a routing information source
+- metric: unit of measure used by a routing protocol in best-path calculation
+
 ** Chapter 7 EIGRP
 ** Chapter 8 OSPF
 ** Chapter 9 Advanced OSPF
