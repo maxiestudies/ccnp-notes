@@ -207,6 +207,10 @@ route fails.
 Null interfaces drop traffic without cpu overhead
 used to discard traffic and avoid routing loops when a default gateway is defined
 *** IPv6 static routes
+are the same as with IPv4
+*** Virtual forwarding and routing (VRF)
+creates separate virtual routers on a physical one
+each virtual router maintains a separate routing table
 
 ** Chapter 7 EIGRP
 ** Chapter 8 OSPF
