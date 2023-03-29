@@ -177,6 +177,37 @@ Components:
 - metric: unit of measure used by a routing protocol in best-path calculation
 the forwarding decision is a function of the FIB and results from the
 calculations performed in the RIB. The RIB is calculated though the combination of routing protocol metrics and administrative distance
+Each routing protocol is it's own process and programs the RIB. Every protocol presents the same information to the RIB: destination network, next-hop, AD and metric.
+Accepting logic:
+- if the route doesn't exist is accepted
+- if the route exists, ADs are compared and the lowest wins
+**** Metrics
+value assigned to a route by the routing protocol for best selection
+***** ECMP (Equal cost multipathing)
+a routing protocol selects multiple routes as best path and all get installed in the RIB
+***** Unequal-cost load balancing
+EIGRP allows the installation of multiple routes with different metrics
+*** Static routing
+manually configured
+**** Directly attached routes
+P2P routes don't use ARP and can directly reference the outbound interface.
+requires that the outbound interface be in an up state to install the route
+**** Recrusive static routes
+specifies the ip of the netx-hop address. The recursion ocurrs when the router queries the
+RIB to locathe the route to the next-hop and cross-references the adjacency table.
+requires the next-hop address to exist in the routing table.
+**** Fully specefied static routes
+uses the outbound interface and next-hop ips
+avoids recursion and makes the outbound interface deterministic
+**** Floating static routing
+used to provide a backup from dynamically learned routes
+gets an AD higher than the one learned dynamically, so only gets installed if the dynamic
+route fails.
+**** Static null routes
+Null interfaces drop traffic without cpu overhead
+used to discard traffic and avoid routing loops when a default gateway is defined
+*** IPv6 static routes
+
 ** Chapter 7 EIGRP
 ** Chapter 8 OSPF
 ** Chapter 9 Advanced OSPF
