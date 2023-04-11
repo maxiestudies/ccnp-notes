@@ -211,8 +211,40 @@ are the same as with IPv4
 *** Virtual forwarding and routing (VRF)
 creates separate virtual routers on a physical one
 each virtual router maintains a separate routing table
-
 ** Chapter 7 EIGRP
+has the concept of autonomus system, different from the bgp AS
+each EIFRP process belongs to a autonomus system (routing domain)
+*** Terminology
+- successor route: route with the lowes path metric to reach a destination
+- successor: first next-hop router for the successor route
+- feasible distance FD: metric value for the lowest-metric path to reach a
+  destination
+- reported distance: distance reporter by a router to a prefix. This is the
+  feasible distance for the advertising router.
+- feasibility condition: a condition under which, for a route to be considered a
+  backup route, the reported distance received for that route must be less than
+  the feasible distance calculated locally. This is used to avoid loops.
+*** Topology table
+has all prefixes advertised within an EIGRP autonomus system. Contains:
+- network prefix
+- EIGRP neighbors that advertised that prefix
+- Metrics from each neighbor
+- values used for calculating the metric
+
+ to select the best path, the FD (feasible distance) calculated by the switch,
+  and the RD (reported distance) advertised by the neighbors is compared and the
+  lowest one wins
+*** EIGRP Neighbors
+exchange the entire routing table when forming an adjacency and incremental
+updates afterwards
+uses ip protocol number 88
+**** Packet types:
+- Hello: discovery of neighbors
+- Request: get specific information
+- Update: transmit information
+- Query: dent out to search for another path during convergence
+- Reply: Sent in response to a query packet
+
 ** Chapter 8 OSPF
 ** Chapter 9 Advanced OSPF
 ** Chapter 10 OSPFv3
